@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: hotel-service
+  datasource:
+    url: jdbc:h2:mem:hoteldb;DB_CLOSE_DELAY=-1
+    username: sa
+    password: ""
+    driver-class-name: org.h2.Driver
+  h2:
+    console:
+      enabled: false
+eureka:
+  client:
+    enabled: false
+    register-with-eureka: false
+    fetch-registry: false
+security:
+  jwt:
+    secret: aG90ZWwtcGxhdGZvcm0tand0LXNlY3JldC1rZXktMDEyMzQ1Njc4OWFiY2RlZg==
+app:
+  saga:
+    lock-ttl-minutes: 15
+  scheduling:
+    enabled: false
+logging:
+  pattern:
+    console: "%-5level %logger{16} - %msg%n"

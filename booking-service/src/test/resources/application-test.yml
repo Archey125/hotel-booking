@@ -1,0 +1,47 @@
+spring:
+  application:
+    name: booking-service
+  datasource:
+    url: jdbc:h2:mem:bookingdb;DB_CLOSE_DELAY=-1
+    username: sa
+    password: ""
+    driver-class-name: org.h2.Driver
+  h2:
+    console:
+      enabled: false
+eureka:
+  client:
+    enabled: false
+    register-with-eureka: false
+    fetch-registry: false
+security:
+  jwt:
+    secret: aG90ZWwtcGxhdGZvcm0tand0LXNlY3JldC1rZXktMDEyMzQ1Njc4OWFiY2RlZg==
+    issuer: booking-service
+    ttl-minutes: 60
+app:
+  hotel-client:
+    base-url: http://hotel-service
+    connect-timeout-ms: 1000
+    read-timeout-ms: 3000
+    max-attempts: 3
+    backoff-initial-ms: 50
+    backoff-multiplier: 1.0
+    backoff-max-ms: 100
+  saga:
+    pending-timeout-seconds: 120
+    sweeper-interval-ms: 30000
+  scheduling:
+    enabled: false
+resilience4j:
+  circuitbreaker:
+    instances:
+      hotelService:
+        sliding-window-size: 10
+        minimum-number-of-calls: 5
+        failure-rate-threshold: 50
+        wait-duration-in-open-state: 10s
+        permitted-number-of-calls-in-half-open-state: 3
+logging:
+  pattern:
+    console: "%-5level %logger{16} - %msg%n"
